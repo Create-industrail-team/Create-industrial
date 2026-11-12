@@ -29,18 +29,17 @@ public class ModBlockDataGen extends BlockStateProvider {
             WallBlock wall,
             String blockName
     ) {
+        var texture = modLoc("block/" + blockName);
 
-        slabBlock(slab,
-                modLoc("block/" + blockName),
-                modLoc("block/" + blockName));
 
-        stairsBlock(stair,
-                blockName,
-                modLoc("block/" + blockName));
+        slabBlock(slab, texture, texture);
+        stairsBlock(stair, texture);
+        wallBlock(wall, texture);
 
-        wallBlock(wall,
-                blockName,
-                modLoc("block/" + blockName));
+        itemModels().slab(blockName + "_slab", texture, texture, texture);
+        itemModels().stairs(blockName + "_stairs", texture, texture, texture);
+
+        itemModels().wallInventory(blockName + "_wall", texture);
     }
 
     private void addSimpleBlockSetWithBlock(
@@ -50,7 +49,7 @@ public class ModBlockDataGen extends BlockStateProvider {
             WallBlock wall,
             String blockName
     ) {
-        simpleBlock(block, models().cubeAll(
+        simpleBlockWithItem(block, models().cubeAll(
                 blockName,
                 modLoc("block/" + blockName)
         ));
@@ -70,6 +69,8 @@ public class ModBlockDataGen extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+
+        // normal blocks
         addSimpleBlock(ModBlocks.KIRK_BLOCK.get(), "kirk_block");
         addSimpleBlock(ModBlocks.BLOCK_OF_ALUMINIUM.get(), "block_of_aluminium");
         addSimpleBlock(ModBlocks.BLOCK_OF_STEEL.get(), "block_of_steel");
@@ -80,13 +81,8 @@ public class ModBlockDataGen extends BlockStateProvider {
         addSimpleBlock(ModBlocks.CONDENSING_MESH.get(), "condensing_mesh");
         addSimpleBlock(ModBlocks.REFRACTORY_BRICKS.get(), "refractory_bricks");
 
-        addSimpleBlockSet(
-                ModBlocks.REINFORCED_CONCRETE_SLAB.get(),
-                ModBlocks.REINFORCED_CONCRETE_STAIRS.get(),
-                ModBlocks.REINFORCED_CONCRETE_WALL.get(),
-                "reinforced_concrete"
-        );
 
+        // Custom sided
         simpleBlockWithItem( ModBlocks.REINFORCED_CONCRETE.get(),models().cubeBottomTop(
                                 "reinforced_concrete",
                         modLoc("block/reinforced_concrete"),
@@ -94,5 +90,12 @@ public class ModBlockDataGen extends BlockStateProvider {
                         modLoc("block/reinforced_concrete_top")));
 
 
+        // BLOCKSETS
+        addSimpleBlockSet(
+                ModBlocks.REINFORCED_CONCRETE_SLAB.get(),
+                ModBlocks.REINFORCED_CONCRETE_STAIRS.get(),
+                ModBlocks.REINFORCED_CONCRETE_WALL.get(),
+                "reinforced_concrete"
+        );
     }
 }
