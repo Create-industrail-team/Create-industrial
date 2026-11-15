@@ -100,6 +100,15 @@ public class ModBlocks {
 
     );
 
+    public static final DeferredBlock<Block> BLAST_FURNACE_HATCH = BLOCKS.registerSimpleBlock(
+            "blast_furnace_hatch",
+            BlockBehaviour.Properties.of()
+                    .sound(SoundType.DEEPSLATE_BRICKS)
+                    .strength(0.3f,6f)
+                    .requiresCorrectToolForDrops()
+
+    );
+
 
 
     public static final DeferredBlock<ReactorFuelRodFrameBlock> REACTOR_FUEL_ROD_FRAME = BLOCKS.registerBlock(

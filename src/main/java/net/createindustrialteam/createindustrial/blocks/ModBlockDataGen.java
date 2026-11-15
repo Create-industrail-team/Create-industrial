@@ -82,7 +82,14 @@ public class ModBlockDataGen extends BlockStateProvider {
         addSimpleBlock(ModBlocks.REFRACTORY_BRICKS.get(), "refractory_bricks");
 
 
+
         // Custom sided
+        horizontalBlock(
+                ModBlocks.BLAST_FURNACE_HATCH.get(),
+                modLoc("block/refractory_bricks"),       // side
+                modLoc("block/blast_furnace_hatch"),     // front
+                modLoc("block/refractory_bricks") // top (and bottom)
+        );
         simpleBlockWithItem( ModBlocks.REINFORCED_CONCRETE.get(),models().cubeBottomTop(
                                 "reinforced_concrete",
                         modLoc("block/reinforced_concrete"),
