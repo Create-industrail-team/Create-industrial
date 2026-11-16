@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "createindustrial:block/blast_furnace_hatch",
+    "side": "createindustrial:block/refractory_bricks",
+    "top": "createindustrial:block/refractory_bricks"
+  }
+}

@@ -1,6 +1,5 @@
-package net.createindustrialteam.createindustrial.blocks;
+package net.createindustrialteam.createindustrial.blocks.blockstates;
 
-import net.minecraft.core.BlockBox;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -8,7 +7,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.client.event.RenderHighlightEvent;
 
 public class ReactorFuelRodFrameBlock extends Block {
     public static final VoxelShape SHAPE = Shapes.or(

@@ -90,6 +90,12 @@ public class ModBlockDataGen extends BlockStateProvider {
                 modLoc("block/blast_furnace_hatch"),     // front
                 modLoc("block/refractory_bricks") // top (and bottom)
         );
+
+        simpleBlockItem(
+                ModBlocks.BLAST_FURNACE_HATCH.get(),
+                models().getExistingFile(modLoc("block/blast_furnace_hatch"))
+        );
+
         simpleBlockWithItem( ModBlocks.REINFORCED_CONCRETE.get(),models().cubeBottomTop(
                                 "reinforced_concrete",
                         modLoc("block/reinforced_concrete"),

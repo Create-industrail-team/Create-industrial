@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createindustrial:block/blast_furnace_hatch",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustrial:block/blast_furnace_hatch"
+    },
+    "facing=south": {
+      "model": "createindustrial:block/blast_furnace_hatch",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createindustrial:block/blast_furnace_hatch",
+      "y": 270
+    }
+  }
+}

@@ -93,6 +93,9 @@ public class ModItems {
     public static final DeferredItem<Item> FIRECLAY =
     ITEMS.registerSimpleItem("fireclay");
 
+    public static final DeferredItem<BlockItem> BLAST_FURNACE_HATCH =
+            ITEMS.registerSimpleBlockItem(ModBlocks.BLAST_FURNACE_HATCH);
+
     public static final DeferredItem<BlockItem> REINFORCED_CONCRETE_SLAB =
         ITEMS.registerSimpleBlockItem("reinforced_concrete_slab", ModBlocks.REINFORCED_CONCRETE_SLAB );
 

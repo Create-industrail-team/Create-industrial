@@ -1,5 +1,7 @@
 package net.createindustrialteam.createindustrial.blocks;
 
+import net.createindustrialteam.createindustrial.blocks.blockstates.BlastFurnaceHatch;
+import net.createindustrialteam.createindustrial.blocks.blockstates.ReactorFuelRodFrameBlock;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
@@ -12,6 +14,27 @@ public class ModBlocks {
             DeferredRegister.createBlocks("createindustrial");
 
 
+    //Custom renders/horisontal blocks
+    public static final DeferredBlock<ReactorFuelRodFrameBlock> REACTOR_FUEL_ROD_FRAME = BLOCKS.registerBlock(
+            "reactor_fuel_rod_frame",
+            ReactorFuelRodFrameBlock::new,
+            BlockBehaviour.Properties.of()
+                    .sound(SoundType.COPPER_GRATE)
+                    .strength(0.2f,0.5f)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+
+
+    );
+
+    public static final DeferredBlock<BlastFurnaceHatch> BLAST_FURNACE_HATCH = BLOCKS.registerBlock(
+            "blast_furnace_hatch",
+            BlastFurnaceHatch::new,
+            BlockBehaviour.Properties.of()
+                    .sound(SoundType.DEEPSLATE_BRICKS)
+                    .strength(0.3f,6f)
+                    .requiresCorrectToolForDrops()
+    );
     //basic blocks
 
     public static final DeferredBlock<Block> REINFORCED_CONCRETE = BLOCKS.registerSimpleBlock(
@@ -97,29 +120,6 @@ public class ModBlocks {
                     .sound(SoundType.DEEPSLATE_BRICKS)
                     .strength(0.3f,6f)
                     .requiresCorrectToolForDrops()
-
-    );
-
-    public static final DeferredBlock<Block> BLAST_FURNACE_HATCH = BLOCKS.registerSimpleBlock(
-            "blast_furnace_hatch",
-            BlockBehaviour.Properties.of()
-                    .sound(SoundType.DEEPSLATE_BRICKS)
-                    .strength(0.3f,6f)
-                    .requiresCorrectToolForDrops()
-
-    );
-
-
-
-    public static final DeferredBlock<ReactorFuelRodFrameBlock> REACTOR_FUEL_ROD_FRAME = BLOCKS.registerBlock(
-            "reactor_fuel_rod_frame",
-            ReactorFuelRodFrameBlock::new,
-            BlockBehaviour.Properties.of()
-                    .sound(SoundType.COPPER_GRATE)
-                    .strength(0.2f,0.5f)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-
 
     );
 
