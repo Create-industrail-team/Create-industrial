@@ -1,6 +1,7 @@
 
 package net.createindustrialteam.createindustrial.blocks;
 
+import static net.createindustrialteam.createindustrial.CreateIndustrial.MODID;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 
@@ -17,7 +18,7 @@ public class ModBlockDataGen extends BlockStateProvider {
             PackOutput output,
             ExistingFileHelper exFileHelper
     ) {
-        super(output, "createindustrial", exFileHelper);
+        super(output, MODID, exFileHelper);
     }
     private void addSimpleBlock(Block block, String blockName) {
         simpleBlockWithItem( block,models().cubeAll(blockName, modLoc("block/" + blockName)));
@@ -80,6 +81,7 @@ public class ModBlockDataGen extends BlockStateProvider {
         addSimpleBlock(ModBlocks.BLOCK_OF_CALIFORNIUM.get(), "block_of_californium");
         addSimpleBlock(ModBlocks.CONDENSING_MESH.get(), "condensing_mesh");
         addSimpleBlock(ModBlocks.REFRACTORY_BRICKS.get(), "refractory_bricks");
+
 
 
 

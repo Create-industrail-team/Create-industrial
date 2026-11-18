@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createindustrial:block/laser_engraver/body",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustrial:block/laser_engraver/body"
+    },
+    "facing=south": {
+      "model": "createindustrial:block/laser_engraver/body",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createindustrial:block/laser_engraver/body",
+      "y": 270
+    }
+  }
+}

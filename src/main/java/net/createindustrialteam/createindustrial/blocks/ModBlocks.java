@@ -1,6 +1,7 @@
 package net.createindustrialteam.createindustrial.blocks;
 
 import net.createindustrialteam.createindustrial.blocks.blockstates.BlastFurnaceHatch;
+import net.createindustrialteam.createindustrial.blocks.blockstates.LaserEngraver;
 import net.createindustrialteam.createindustrial.blocks.blockstates.ReactorFuelRodFrameBlock;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -8,10 +9,12 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import static net.createindustrialteam.createindustrial.CreateIndustrial.MODID;
+
 public class ModBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS =
-            DeferredRegister.createBlocks("createindustrial");
+            DeferredRegister.createBlocks(MODID);
 
 
     //Custom renders/horisontal blocks
@@ -170,7 +173,7 @@ public class ModBlocks {
                     .strength(0.5f,1f)
                     .requiresCorrectToolForDrops()
             )
-    );;
+    );
 
      public static final DeferredBlock<StairBlock> REINFORCED_CONCRETE_STAIRS = BLOCKS.register(
             "reinforced_concrete_stairs",
@@ -180,6 +183,13 @@ public class ModBlocks {
                      .requiresCorrectToolForDrops()
              )
     );
+
+     public static final DeferredBlock<LaserEngraver> LASER_ENGRAVER = BLOCKS.register(
+             "laser_engraver",
+             () -> new LaserEngraver(BlockBehaviour.Properties.of()
+                     .sound(SoundType.STONE)
+                     .strength(0.5f, 1f)
+                     .requiresCorrectToolForDrops()));
 
  //Marker
     public static void register(IEventBus modEventBus){

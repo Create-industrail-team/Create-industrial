@@ -7,9 +7,11 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import static net.createindustrialteam.createindustrial.CreateIndustrial.MODID;
+
 public class ModItems {
     public static final DeferredRegister.Items ITEMS =
-            DeferredRegister.createItems("createindustrial");
+            DeferredRegister.createItems(MODID);
     // Block items
     public static final DeferredItem<BlockItem> BLOCK_OF_ALUMINIUM_ITEM =
             ITEMS.registerSimpleBlockItem("block_of_aluminium", ModBlocks.BLOCK_OF_ALUMINIUM);
@@ -49,6 +51,9 @@ public class ModItems {
 
     public static final DeferredItem<BlockItem> ALUMINA_DUST =
             ITEMS.registerSimpleBlockItem("alumina_dust", ModBlocks.ALUMINA_DUST_LAYER);
+
+    public static final DeferredItem<BlockItem> LASER_ENGRAVER =
+            ITEMS.registerSimpleBlockItem("laser_engraver", ModBlocks.LASER_ENGRAVER);
 
     // regular items
     public static final DeferredItem<Item> FIREBRICK =
