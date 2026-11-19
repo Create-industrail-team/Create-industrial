@@ -22,6 +22,8 @@ public class ExampleModClient {
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
         // Do not forget to add translations for your config options to the en_us.json file.
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+
+        ModPartialModels.init();
     }
 
     @SubscribeEvent

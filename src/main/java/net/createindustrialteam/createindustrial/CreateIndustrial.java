@@ -2,9 +2,11 @@ package net.createindustrialteam.createindustrial;
 
 import com.mojang.logging.LogUtils;
 import net.createindustrialteam.createindustrial.blocks.ModBlockDataGen;
+import net.createindustrialteam.createindustrial.blocks.ModBlockEntities;
 import net.createindustrialteam.createindustrial.blocks.ModBlocks;
 import net.createindustrialteam.createindustrial.items.ModCreativeModTabs;
 import net.createindustrialteam.createindustrial.items.ModItems;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -30,6 +32,7 @@ public class CreateIndustrial {
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModCreativeModTabs.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
 
 
         NeoForge.EVENT_BUS.register(this);
@@ -46,5 +49,9 @@ public class CreateIndustrial {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+    }
+
+    public static ResourceLocation asResource(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }
