@@ -7,11 +7,11 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static net.createindustrialteam.createindustrial.blocks.ModBlockEntities.LASER_ENGRAVER_BLOCK_ENTITY;
+import static net.createindustrialteam.createindustrial.blocks.ModBlockEntities.*;
 
 public class LaserEngraverBlockEntity extends BasinOperatingBlockEntity {
-    public LaserEngraverBlockEntity(BlockPos pos, BlockState state) {
-        super(LASER_ENGRAVER_BLOCK_ENTITY.get(), pos, state);
+    public LaserEngraverBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Override

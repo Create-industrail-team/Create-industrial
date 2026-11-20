@@ -1,5 +1,7 @@
 package net.createindustrialteam.createindustrial.blocks;
 
+import com.tterrag.registrate.util.entry.BlockEntry;
+import net.createindustrialteam.createindustrial.CreateIndustrial;
 import net.createindustrialteam.createindustrial.blocks.blockstates.BlastFurnaceHatch;
 import net.createindustrialteam.createindustrial.blocks.blockstates.LaserEngraver;
 import net.createindustrialteam.createindustrial.blocks.blockstates.ReactorFuelRodFrameBlock;
@@ -184,12 +186,21 @@ public class ModBlocks {
              )
     );
 
-     public static final DeferredBlock<LaserEngraver> LASER_ENGRAVER = BLOCKS.register(
+     /*public static final DeferredBlock<LaserEngraver> LASER_ENGRAVER = BLOCKS.register(
              "laser_engraver",
              () -> new LaserEngraver(BlockBehaviour.Properties.of()
                      .sound(SoundType.STONE)
                      .strength(0.5f, 1f)
-                     .requiresCorrectToolForDrops()));
+                     .requiresCorrectToolForDrops()));*/
+
+    public static final BlockEntry<LaserEngraver> LASER_ENGRAVER = CreateIndustrial.REGISTRATE
+            .block("laser_engraver", LaserEngraver::new)
+            .properties(p -> p
+                    .sound(SoundType.STONE)
+                    .strength(0.5f, 1f)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion())
+            .register();
 
  //Marker
     public static void register(IEventBus modEventBus){

@@ -1,6 +1,7 @@
 package net.createindustrialteam.createindustrial;
 
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.createindustrialteam.createindustrial.blocks.ModBlockDataGen;
 import net.createindustrialteam.createindustrial.blocks.ModBlockEntities;
 import net.createindustrialteam.createindustrial.blocks.ModBlocks;
@@ -24,15 +25,19 @@ public class CreateIndustrial {
     public static final String MODID = "createindustrial";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public CreateIndustrial(IEventBus modEventBus, ModContainer modContainer) {
-        modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::addCreative);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
 
-        modEventBus.register(ModDataGenerators.class);
-        ModBlocks.register(modEventBus);
-        ModItems.register(modEventBus);
-        ModCreativeModTabs.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
+    public CreateIndustrial(IEventBus eventBus, ModContainer modContainer) {
+        eventBus.addListener(this::commonSetup);
+        eventBus.addListener(this::addCreative);
+        eventBus.register(ModDataGenerators.class);
+
+        REGISTRATE.registerEventListeners(eventBus);
+
+        ModBlocks.register(eventBus);
+        ModItems.register(eventBus);
+        ModCreativeModTabs.register(eventBus);
+        ModBlockEntities.register(eventBus);
 
 
         NeoForge.EVENT_BUS.register(this);

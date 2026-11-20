@@ -44,7 +44,6 @@ public class LaserEngraverRenderer extends KineticBlockEntityRenderer<LaserEngra
         //super.renderSafe(blockEntity, partialTick, stack, bufferSource, packedLight, packedOverlay);
 
         LevelAccessor level = blockEntity.getLevel();
-        System.err.println(level + " " + Minecraft.getInstance().level);
         if (VisualizationManager.supportsVisualization(blockEntity.getLevel()))
             return;
 
