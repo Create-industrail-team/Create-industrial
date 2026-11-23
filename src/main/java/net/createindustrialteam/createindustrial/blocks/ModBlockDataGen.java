@@ -71,7 +71,7 @@ public class ModBlockDataGen extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
-        // normal blocks
+        // Normal blocks
         addSimpleBlock(ModBlocks.KIRK_BLOCK.get(), "kirk_block");
         addSimpleBlock(ModBlocks.BLOCK_OF_ALUMINIUM.get(), "block_of_aluminium");
         addSimpleBlock(ModBlocks.BLOCK_OF_STEEL.get(), "block_of_steel");
@@ -81,6 +81,12 @@ public class ModBlockDataGen extends BlockStateProvider {
         addSimpleBlock(ModBlocks.BLOCK_OF_CALIFORNIUM.get(), "block_of_californium");
         addSimpleBlock(ModBlocks.CONDENSING_MESH.get(), "condensing_mesh");
         addSimpleBlock(ModBlocks.REFRACTORY_BRICKS.get(), "refractory_bricks");
+
+        // Machine blocks (custom models)
+        simpleBlockItem(
+                ModBlocks.LASER_ENGRAVER.get(),
+                models().getExistingFile(modLoc("block/laser_engraver"))
+        );
 
 
 

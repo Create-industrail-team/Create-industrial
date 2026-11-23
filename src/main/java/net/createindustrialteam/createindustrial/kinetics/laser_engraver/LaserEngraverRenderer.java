@@ -1,6 +1,7 @@
 package net.createindustrialteam.createindustrial.kinetics.laser_engraver;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
@@ -14,8 +15,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.joml.Quaternionf;
+import org.joml.Quaternionfc;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
@@ -42,6 +47,19 @@ public class LaserEngraverRenderer extends KineticBlockEntityRenderer<LaserEngra
     protected void renderSafe(LaserEngraverBlockEntity blockEntity, float partialTick, PoseStack stack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         // Do the rendering here.
         //super.renderSafe(blockEntity, partialTick, stack, bufferSource, packedLight, packedOverlay);
+
+        /*VertexConsumer consumer = bufferSource.getBuffer(RenderType.LIGHTNING);
+        int renderedLaserAlpha = blockEntity.getEngravingBehaviour().getRenderedLaserAlpha(partialTick);
+        SuperByteBuffer block = CachedBuffers.block(Blocks.BROWN_GLAZED_TERRACOTTA.defaultBlockState());
+        float size = 0.25f * 0.12f;
+        float scalar = (1 - size * 1.5f) * 0.5f;
+        Quaternionf rotate = new Quaternionf(0.924, 0, 0.383, 0);
+
+        block.color(255, 255, 255, 255)
+                .translate(scalar, -14/16f, scalar)
+                .scale(size, 1, size)
+                .rotateCentered((float)Math.PI * 0.25f, Direction.Axis.Y)
+                .renderInto(stack, consumer);*/
 
         LevelAccessor level = blockEntity.getLevel();
         if (VisualizationManager.supportsVisualization(blockEntity.getLevel()))

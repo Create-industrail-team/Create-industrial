@@ -52,8 +52,8 @@ public class ModItems {
     public static final DeferredItem<BlockItem> ALUMINA_DUST =
             ITEMS.registerSimpleBlockItem("alumina_dust", ModBlocks.ALUMINA_DUST_LAYER);
 
-    public static final DeferredItem<BlockItem> LASER_ENGRAVER =
-            ITEMS.registerSimpleBlockItem("laser_engraver", ModBlocks.LASER_ENGRAVER);
+    //public static final DeferredItem<BlockItem> LASER_ENGRAVER =
+    //        ITEMS.registerSimpleBlockItem("laser_engraver", ModBlocks.LASER_ENGRAVER);
 
     // regular items
     public static final DeferredItem<Item> FIREBRICK =

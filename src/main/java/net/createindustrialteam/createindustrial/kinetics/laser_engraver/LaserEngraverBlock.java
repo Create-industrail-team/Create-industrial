@@ -1,26 +1,23 @@
-package net.createindustrialteam.createindustrial.blocks.blockstates;
+package net.createindustrialteam.createindustrial.kinetics.laser_engraver;
 
-import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.createindustrialteam.createindustrial.blocks.ModBlockEntities;
-import net.createindustrialteam.createindustrial.kinetics.laser_engraver.LaserEngraverBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class LaserEngraver extends HorizontalKineticBlock implements IBE<LaserEngraverBlockEntity> {
+public class LaserEngraverBlock extends HorizontalKineticBlock implements IBE<LaserEngraverBlockEntity> {
 
-    public LaserEngraver(Properties properties) {
+    public LaserEngraverBlock(Properties properties) {
         super(properties);
     }
 

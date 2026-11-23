@@ -1,9 +1,12 @@
 package net.createindustrialteam.createindustrial.blocks;
 
+import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
+import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.createindustrialteam.createindustrial.CreateIndustrial;
 import net.createindustrialteam.createindustrial.blocks.blockstates.BlastFurnaceHatch;
-import net.createindustrialteam.createindustrial.blocks.blockstates.LaserEngraver;
+import net.createindustrialteam.createindustrial.kinetics.laser_engraver.LaserEngraverBlock;
 import net.createindustrialteam.createindustrial.blocks.blockstates.ReactorFuelRodFrameBlock;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -11,6 +14,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static net.createindustrialteam.createindustrial.CreateIndustrial.MODID;
 
 public class ModBlocks {
@@ -186,20 +191,22 @@ public class ModBlocks {
              )
     );
 
-     /*public static final DeferredBlock<LaserEngraver> LASER_ENGRAVER = BLOCKS.register(
+     /*public static final DeferredBlock<LaserEngraverBlock> LASER_ENGRAVER = BLOCKS.register(
              "laser_engraver",
-             () -> new LaserEngraver(BlockBehaviour.Properties.of()
+             () -> new LaserEngraverBlock(BlockBehaviour.Properties.of()
                      .sound(SoundType.STONE)
                      .strength(0.5f, 1f)
                      .requiresCorrectToolForDrops()));*/
 
-    public static final BlockEntry<LaserEngraver> LASER_ENGRAVER = CreateIndustrial.REGISTRATE
-            .block("laser_engraver", LaserEngraver::new)
+    public static final BlockEntry<LaserEngraverBlock> LASER_ENGRAVER = CreateIndustrial.REGISTRATE
+            .block("laser_engraver", LaserEngraverBlock::new)
+            .initialProperties(SharedProperties::stone)
             .properties(p -> p
-                    .sound(SoundType.STONE)
-                    .strength(0.5f, 1f)
-                    .requiresCorrectToolForDrops()
                     .noOcclusion())
+            .transform(axeOrPickaxe())
+            .blockstate(BlockStateGen.horizontalBlockProvider(true))
+            .item(AssemblyOperatorBlockItem::new)
+            .transform(customItemModel())
             .register();
 
  //Marker
