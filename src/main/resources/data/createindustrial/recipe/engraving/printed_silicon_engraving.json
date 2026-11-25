@@ -1,0 +1,13 @@
+{
+  "type": "createindustrial:engraving",
+  "ingredients": [
+    {
+      "tag": "createindustrial:silicon_wafer"
+    }
+  ],
+  [
+    {
+      "tag": "createindustrial:printed_silicon_wafer"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
-package net.createindustrialteam.createindustrial.kinetics.laser_engraver;
+package net.createindustrialteam.createindustrial.blocks.laser_engraver;
 
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
-import net.createindustrialteam.createindustrial.blocks.ModBlockEntities;
+import net.createindustrialteam.createindustrial.CIBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -49,6 +49,6 @@ public class LaserEngraverBlock extends HorizontalKineticBlock implements IBE<La
 
     @Override
     public BlockEntityType<? extends LaserEngraverBlockEntity> getBlockEntityType() {
-        return ModBlockEntities.LASER_ENGRAVER_BLOCK.get();
+        return CIBlockEntities.LASER_ENGRAVER_BLOCK.get();
     }
 }

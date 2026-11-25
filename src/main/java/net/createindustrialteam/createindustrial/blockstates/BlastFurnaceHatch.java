@@ -1,4 +1,4 @@
-package net.createindustrialteam.createindustrial.blocks.blockstates;
+package net.createindustrialteam.createindustrial.blockstates;
 
 public class BlastFurnaceHatch extends ModHorisontalBlock {
 

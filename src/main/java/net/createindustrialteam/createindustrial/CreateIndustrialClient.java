@@ -16,14 +16,14 @@ import net.createmod.ponder.foundation.PonderIndex;
 @Mod(value = CreateIndustrial.MODID, dist = Dist.CLIENT)
 // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
 @EventBusSubscriber(modid = CreateIndustrial.MODID, value = Dist.CLIENT)
-public class ExampleModClient {
-    public ExampleModClient(ModContainer container) {
+public class CreateIndustrialClient {
+    public CreateIndustrialClient(ModContainer container) {
         // Allows NeoForge to create a config screen for this mod's configs.
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
         // Do not forget to add translations for your config options to the en_us.json file.
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
-        ModPartialModels.init();
+        CIPartialModels.init();
     }
 
     @SubscribeEvent

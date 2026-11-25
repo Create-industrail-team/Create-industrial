@@ -1,14 +1,13 @@
 
 package net.createindustrialteam.createindustrial;
 
-import net.createindustrialteam.createindustrial.blocks.ModBlockDataGen;
-
+import net.createindustrialteam.createindustrial.datagen.CIBlockDataGen;
 import net.minecraft.data.DataGenerator;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-public class ModDataGenerators {
+public class CIDataGenerators {
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
@@ -17,7 +16,7 @@ public class ModDataGenerators {
 
         generator.addProvider(
                 event.includeClient(),
-                new ModBlockDataGen(
+                new CIBlockDataGen(
                         generator.getPackOutput(),
                         event.getExistingFileHelper()
                 )

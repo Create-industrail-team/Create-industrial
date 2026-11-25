@@ -1,4 +1,4 @@
-package net.createindustrialteam.createindustrial.blocks.blockstates;
+package net.createindustrialteam.createindustrial.blockstates;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;

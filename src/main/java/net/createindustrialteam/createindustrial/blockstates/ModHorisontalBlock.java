@@ -1,4 +1,4 @@
-package net.createindustrialteam.createindustrial.blocks.blockstates;
+package net.createindustrialteam.createindustrial.blockstates;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;

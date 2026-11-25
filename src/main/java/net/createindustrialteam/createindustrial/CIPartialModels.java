@@ -1,10 +1,8 @@
 package net.createindustrialteam.createindustrial;
 
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.Create;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
-public class ModPartialModels {
+public class CIPartialModels {
 
     public static final PartialModel
 

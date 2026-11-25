@@ -1,6 +1,6 @@
-package net.createindustrialteam.createindustrial.items;
+package net.createindustrialteam.createindustrial;
 
-import net.createindustrialteam.createindustrial.blocks.ModBlocks;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -9,51 +9,57 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static net.createindustrialteam.createindustrial.CreateIndustrial.MODID;
 
-public class ModItems {
+public class CIItems {
+    public static final CreateRegistrate REGISTRATE = CreateIndustrial.registrate();
+
+    static {
+        REGISTRATE.setCreativeTab(CICreativeModeTabs.CREATE_INDUSTRIAL_TAB);
+    }
+
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(MODID);
     // Block items
     public static final DeferredItem<BlockItem> BLOCK_OF_ALUMINIUM_ITEM =
-            ITEMS.registerSimpleBlockItem("block_of_aluminium", ModBlocks.BLOCK_OF_ALUMINIUM);
+            ITEMS.registerSimpleBlockItem("block_of_aluminium", CIBlocks.BLOCK_OF_ALUMINIUM);
 
     public static final DeferredItem<BlockItem> KIRK_BLOCK =
-            ITEMS.registerSimpleBlockItem("kirk_block", ModBlocks.KIRK_BLOCK);
+            ITEMS.registerSimpleBlockItem("kirk_block", CIBlocks.KIRK_BLOCK);
 
     public static final DeferredItem<BlockItem> REINFORCED_CONCRETE =
-            ITEMS.registerSimpleBlockItem("reinforced_concrete", ModBlocks.REINFORCED_CONCRETE);
+            ITEMS.registerSimpleBlockItem("reinforced_concrete", CIBlocks.REINFORCED_CONCRETE);
 
     public static final DeferredItem<BlockItem> PLASTERED_REINFORCED_CONCRETE =
-            ITEMS.registerSimpleBlockItem("plastered_reinforced_concrete", ModBlocks.PLASTERED_REINFORCED_CONCRETE);
+            ITEMS.registerSimpleBlockItem("plastered_reinforced_concrete", CIBlocks.PLASTERED_REINFORCED_CONCRETE);
 
     public static final DeferredItem<BlockItem> CONDENSING_MESH =
-            ITEMS.registerSimpleBlockItem("condensing_mesh", ModBlocks.CONDENSING_MESH);
+            ITEMS.registerSimpleBlockItem("condensing_mesh", CIBlocks.CONDENSING_MESH);
 
     public static final DeferredItem<BlockItem> BLOCK_OF_URANIUM =
-            ITEMS.registerSimpleBlockItem("block_of_uranium", ModBlocks.BLOCK_OF_URANIUM);
+            ITEMS.registerSimpleBlockItem("block_of_uranium", CIBlocks.BLOCK_OF_URANIUM);
 
     public static final DeferredItem<BlockItem> BLOCK_OF_PLUTONIUM =
-            ITEMS.registerSimpleBlockItem("block_of_plutonium", ModBlocks.BLOCK_OF_PLUTONIUM);
+            ITEMS.registerSimpleBlockItem("block_of_plutonium", CIBlocks.BLOCK_OF_PLUTONIUM);
 
     public static final DeferredItem<BlockItem> BLOCK_OF_CALIFORNIUM =
-            ITEMS.registerSimpleBlockItem("block_of_californium", ModBlocks.BLOCK_OF_CALIFORNIUM);
+            ITEMS.registerSimpleBlockItem("block_of_californium", CIBlocks.BLOCK_OF_CALIFORNIUM);
 
     public static final DeferredItem<BlockItem> BLOCK_OF_STEEL =
-            ITEMS.registerSimpleBlockItem("block_of_steel", ModBlocks.BLOCK_OF_STEEL);
+            ITEMS.registerSimpleBlockItem("block_of_steel", CIBlocks.BLOCK_OF_STEEL);
 
     public static final DeferredItem<BlockItem> REFRACTORY_BRICKS =
-            ITEMS.registerSimpleBlockItem("refractory_bricks", ModBlocks.REFRACTORY_BRICKS);
+            ITEMS.registerSimpleBlockItem("refractory_bricks", CIBlocks.REFRACTORY_BRICKS);
 
     public static final DeferredItem<BlockItem> REACTOR_FUEL_ROD_FRAME =
-            ITEMS.registerSimpleBlockItem("reactor_fuel_rod_frame", ModBlocks.REACTOR_FUEL_ROD_FRAME);
+            ITEMS.registerSimpleBlockItem("reactor_fuel_rod_frame", CIBlocks.REACTOR_FUEL_ROD_FRAME);
 
     public static final DeferredItem<BlockItem> BAUXITE_ORE =
-            ITEMS.registerSimpleBlockItem("bauxite_ore", ModBlocks.BAUXITE_ORE);
+            ITEMS.registerSimpleBlockItem("bauxite_ore", CIBlocks.BAUXITE_ORE);
 
     public static final DeferredItem<BlockItem> ALUMINA_DUST =
-            ITEMS.registerSimpleBlockItem("alumina_dust", ModBlocks.ALUMINA_DUST_LAYER);
+            ITEMS.registerSimpleBlockItem("alumina_dust", CIBlocks.ALUMINA_DUST_LAYER);
 
     //public static final DeferredItem<BlockItem> LASER_ENGRAVER =
-    //        ITEMS.registerSimpleBlockItem("laser_engraver", ModBlocks.LASER_ENGRAVER);
+    //        ITEMS.registerSimpleBlockItem("laser_engraver", CIBlocks.LASER_ENGRAVER);
 
     // regular items
     public static final DeferredItem<Item> FIREBRICK =
@@ -99,16 +105,16 @@ public class ModItems {
     ITEMS.registerSimpleItem("fireclay");
 
     public static final DeferredItem<BlockItem> BLAST_FURNACE_HATCH =
-            ITEMS.registerSimpleBlockItem(ModBlocks.BLAST_FURNACE_HATCH);
+            ITEMS.registerSimpleBlockItem(CIBlocks.BLAST_FURNACE_HATCH);
 
     public static final DeferredItem<BlockItem> REINFORCED_CONCRETE_SLAB =
-        ITEMS.registerSimpleBlockItem("reinforced_concrete_slab", ModBlocks.REINFORCED_CONCRETE_SLAB );
+        ITEMS.registerSimpleBlockItem("reinforced_concrete_slab", CIBlocks.REINFORCED_CONCRETE_SLAB );
 
     public static final DeferredItem<BlockItem> REINFORCED_CONCRETE_WALL =
-        ITEMS.registerSimpleBlockItem("reinforced_concrete_wall", ModBlocks.REINFORCED_CONCRETE_WALL );
+        ITEMS.registerSimpleBlockItem("reinforced_concrete_wall", CIBlocks.REINFORCED_CONCRETE_WALL );
 
     public static final DeferredItem<BlockItem> REINFORCED_CONCRETE_STAIRS =
-        ITEMS.registerSimpleBlockItem("reinforced_concrete_stairs", ModBlocks.REINFORCED_CONCRETE_STAIRS );
+        ITEMS.registerSimpleBlockItem("reinforced_concrete_stairs", CIBlocks.REINFORCED_CONCRETE_STAIRS );
 
     //Marker
     public static void register(IEventBus modEventBus){

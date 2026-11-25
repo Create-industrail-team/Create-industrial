@@ -1,13 +1,13 @@
-package net.createindustrialteam.createindustrial.blocks;
+package net.createindustrialteam.createindustrial;
 
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.createindustrialteam.createindustrial.CreateIndustrial;
-import net.createindustrialteam.createindustrial.blocks.blockstates.BlastFurnaceHatch;
-import net.createindustrialteam.createindustrial.kinetics.laser_engraver.LaserEngraverBlock;
-import net.createindustrialteam.createindustrial.blocks.blockstates.ReactorFuelRodFrameBlock;
+import net.createindustrialteam.createindustrial.blockstates.BlastFurnaceHatch;
+import net.createindustrialteam.createindustrial.blocks.laser_engraver.LaserEngraverBlock;
+import net.createindustrialteam.createindustrial.blockstates.ReactorFuelRodFrameBlock;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
@@ -18,7 +18,8 @@ import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static net.createindustrialteam.createindustrial.CreateIndustrial.MODID;
 
-public class ModBlocks {
+public class CIBlocks {
+    public static final CreateRegistrate REGISTRATE = CreateIndustrial.registrate();
 
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(MODID);
@@ -191,23 +192,20 @@ public class ModBlocks {
              )
     );
 
-     /*public static final DeferredBlock<LaserEngraverBlock> LASER_ENGRAVER = BLOCKS.register(
-             "laser_engraver",
-             () -> new LaserEngraverBlock(BlockBehaviour.Properties.of()
-                     .sound(SoundType.STONE)
-                     .strength(0.5f, 1f)
-                     .requiresCorrectToolForDrops()));*/
+    static {
+        REGISTRATE.setCreativeTab(CICreativeModeTabs.CREATE_INDUSTRIAL_TAB);
+    }
 
-    public static final BlockEntry<LaserEngraverBlock> LASER_ENGRAVER = CreateIndustrial.REGISTRATE
-            .block("laser_engraver", LaserEngraverBlock::new)
-            .initialProperties(SharedProperties::stone)
-            .properties(p -> p
-                    .noOcclusion())
-            .transform(axeOrPickaxe())
-            .blockstate(BlockStateGen.horizontalBlockProvider(true))
-            .item(AssemblyOperatorBlockItem::new)
-            .transform(customItemModel())
-            .register();
+    public static final BlockEntry<LaserEngraverBlock> LASER_ENGRAVER =
+            REGISTRATE.block("laser_engraver", LaserEngraverBlock::new)
+                .initialProperties(SharedProperties::stone)
+                .properties(p -> p
+                        .noOcclusion())
+                .transform(axeOrPickaxe())
+                .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                .item(AssemblyOperatorBlockItem::new)
+                .transform(customItemModel())
+                .register();
 
  //Marker
     public static void register(IEventBus modEventBus){

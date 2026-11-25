@@ -1,4 +1,4 @@
-package net.createindustrialteam.createindustrial.kinetics.laser_engraver;
+package net.createindustrialteam.createindustrial.blocks.laser_engraver;
 
 import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
@@ -6,9 +6,12 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
@@ -27,6 +30,19 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
     int entityScanCooldown;
 
     int amount = 0;
+
+    public interface EngraverBehaviourSpecifics {
+
+        public boolean tryProcessOnBelt(TransportedItemStack input, List<ItemStack> outputList, boolean simulate);
+
+        public boolean tryProcessInWorld(ItemEntity itemEntity, boolean simulate);
+
+        public void onEngravingCompleted();
+
+        public int getParticleAmount();
+
+        public float getKineticSpeed();
+    }
 
     public <T extends SmartBlockEntity & EngraverBehaviourSpecifics> EngravingBehaviour(T be) {
         super(be);
@@ -64,6 +80,22 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
         }
     }
 
+    public int getRenderedLaserAlpha(float partialTicks) {
+        return amount;
+    }
+
+    public void start(Mode mode) {
+        this.mode = mode;
+        running = true;
+        prevRunningTicks = 0;
+        runningTicks = 0;
+        blockEntity.sendData();
+    }
+
+    public boolean inWorld() {
+        return mode == Mode.WORLD;
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -75,23 +107,32 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
         while (amount >= 256) amount -= 256;
     }
 
-    public interface EngraverBehaviourSpecifics {
+    protected void applyInWorld() {
+        Level level = getWorld();
+        BlockPos worldPosition = getPos();
+        AABB bb = new AABB(worldPosition.below(1));
 
-        public boolean tryProcessOnBelt(TransportedItemStack input, List<ItemStack> outputList, boolean simulate);
+        if (level.isClientSide)
+            return;
 
-        public boolean tryProcessInWorld(ItemEntity itemEntity, boolean simulate);
+        for (Entity entity : level.getEntities(null, bb)) {
+            if (!(entity instanceof  ItemEntity itemEntity))
+                continue;
+            if (!entity.isAlive() || !entity.onGround())
+                continue;
 
-        public boolean canProcessInBulk();
-
-        public void onPressingCompleted();
-
-        public int getParticleAmount();
-
-        public float getKineticSpeed();
+            entityScanCooldown = 0;
+            if (specifics.tryProcessInWorld(itemEntity, false))
+                blockEntity.sendData();
+            break;
+        }
     }
 
-    public int getRenderedLaserAlpha(float partialTicks) {
-        return amount;
+    public int getRunningTickSpeed() {
+        float speed = specifics.getKineticSpeed();
+        if (speed == 0)
+            return 0;
+        return (int) Mth.lerp(Mth.clamp(Math.abs(speed) / 512f, 0, 1), 1, 60);
     }
 
     public enum Mode {

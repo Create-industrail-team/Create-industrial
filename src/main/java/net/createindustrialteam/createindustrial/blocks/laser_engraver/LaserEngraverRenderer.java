@@ -1,26 +1,16 @@
-package net.createindustrialteam.createindustrial.kinetics.laser_engraver;
+package net.createindustrialteam.createindustrial.blocks.laser_engraver;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
-import dev.engine_room.flywheel.api.backend.BackendManager;
-import dev.engine_room.flywheel.api.visualization.VisualizationLevel;
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
-import net.createindustrialteam.createindustrial.ModPartialModels;
+import net.createindustrialteam.createindustrial.CIPartialModels;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.joml.Quaternionf;
-import org.joml.Quaternionfc;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
@@ -67,7 +57,7 @@ public class LaserEngraverRenderer extends KineticBlockEntityRenderer<LaserEngra
 
         BlockState blockState = blockEntity.getBlockState();
 
-        SuperByteBuffer laserRender = CachedBuffers.partialFacing(ModPartialModels.LASER_ENGRAVER_LASER, blockState,
+        SuperByteBuffer laserRender = CachedBuffers.partialFacing(CIPartialModels.LASER_ENGRAVER_LASER, blockState,
                 blockState.getValue(HORIZONTAL_FACING));
         laserRender.translate(0, 0, 0)
                 .light(packedLight)

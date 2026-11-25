@@ -1,4 +1,4 @@
-package net.createindustrialteam.createindustrial.kinetics.laser_engraver;
+package net.createindustrialteam.createindustrial.blocks.laser_engraver;
 
 import com.mojang.math.Axis;
 import com.simibubi.create.content.kinetics.base.ShaftVisual;
@@ -9,7 +9,7 @@ import dev.engine_room.flywheel.lib.instance.InstanceTypes;
 import dev.engine_room.flywheel.lib.instance.TransformedInstance;
 import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
-import net.createindustrialteam.createindustrial.ModPartialModels;
+import net.createindustrialteam.createindustrial.CIPartialModels;
 import net.createmod.catnip.math.AngleHelper;
 import org.joml.Quaternionf;
 
@@ -24,7 +24,7 @@ public class LaserEngraverVisual extends ShaftVisual<LaserEngraverBlockEntity> i
     public LaserEngraverVisual(VisualizationContext context, LaserEngraverBlockEntity blockEntity, float partialTick) {
         super(context, blockEntity, partialTick);
 
-        engraverLaser = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(ModPartialModels.LASER_ENGRAVER_LASER))
+        engraverLaser = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CIPartialModels.LASER_ENGRAVER_LASER))
                 .createInstance();
 
         rotation = Axis.YP
