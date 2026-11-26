@@ -1,7 +1,7 @@
 
 package net.createindustrialteam.createindustrial;
 
-import net.createindustrialteam.createindustrial.datagen.CIBlockDataGen;
+import net.createindustrialteam.createindustrial.data.CIBlockDataGen;
 import net.minecraft.data.DataGenerator;
 
 import net.neoforged.bus.api.SubscribeEvent;

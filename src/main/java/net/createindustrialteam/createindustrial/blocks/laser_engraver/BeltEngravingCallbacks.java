@@ -41,7 +41,7 @@ public class BeltEngravingCallbacks {
             return PASS;
         if (!behaviour.running)
             return PASS;
-        if (behaviour.runningTicks != PressingBehaviour.CYCLE / 2)
+        if (behaviour.runningTicks != PressingBehaviour.CYCLE)
             return HOLD;
 
         ArrayList<ItemStack> results = new ArrayList<>();

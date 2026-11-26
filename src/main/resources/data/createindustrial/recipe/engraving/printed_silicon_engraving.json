@@ -2,12 +2,12 @@
   "type": "createindustrial:engraving",
   "ingredients": [
     {
-      "tag": "createindustrial:silicon_wafer"
+      "item": "createindustrial:silicon_wafer"
     }
   ],
-  [
+  "results": [
     {
-      "tag": "createindustrial:printed_silicon_wafer"
+      "id": "createindustrial:printed_silicon_wafer"
     }
   ]
 }

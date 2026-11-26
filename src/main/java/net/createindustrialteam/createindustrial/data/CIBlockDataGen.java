@@ -1,5 +1,5 @@
 
-package net.createindustrialteam.createindustrial.datagen;
+package net.createindustrialteam.createindustrial.data;
 
 import static net.createindustrialteam.createindustrial.CreateIndustrial.MODID;
 

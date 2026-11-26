@@ -19,16 +19,12 @@ public class LaserEngraverVisual extends ShaftVisual<LaserEngraverBlockEntity> i
 
     // Issue: The laser model is *slightly* off centre, not important fix
     private final TransformedInstance engraverLaser;
-    Quaternionf rotation;
 
     public LaserEngraverVisual(VisualizationContext context, LaserEngraverBlockEntity blockEntity, float partialTick) {
         super(context, blockEntity, partialTick);
 
         engraverLaser = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CIPartialModels.LASER_ENGRAVER_LASER))
                 .createInstance();
-
-        rotation = Axis.YP
-                .rotationDegrees(AngleHelper.horizontalAngle(blockState.getValue(LaserEngraverBlock.HORIZONTAL_FACING)));
 
         transformModels(partialTick);
     }
@@ -40,15 +36,18 @@ public class LaserEngraverVisual extends ShaftVisual<LaserEngraverBlockEntity> i
 
     private void transformModels(float pt) {
         float renderedLaserScale = getRenderedLaserScale(pt);
-        int renderedLaserAlpha = getRenderedLaserAlpha(pt);
+        float renderedLaserWidth = getRenderedLaserWidth(pt);
 
-        engraverLaser.setIdentityTransform()
-                .translate(getVisualPosition())
-                .translate(0, 0.125f, 0)
-                .scale(1, renderedLaserScale * renderedLaserAlpha / 255, 1)
-                .rotateAround(rotation, 0.5f, 0.5f, 0.5f)
-                .color(255, 255, 255, renderedLaserAlpha)
-                .setChanged();
+        if (getRunning()) {
+            engraverLaser.setIdentityTransform()
+                    .translate(getVisualPosition())
+                    .translate(1/2f, 0.125f, 1/2f)
+                    .scale(renderedLaserWidth, renderedLaserScale, renderedLaserWidth)
+                    .setChanged();
+            engraverLaser.setVisible(true);
+        } else {
+            engraverLaser.setVisible(false);
+        }
     }
 
     private float getRenderedLaserScale(float pt) {
@@ -56,9 +55,14 @@ public class LaserEngraverVisual extends ShaftVisual<LaserEngraverBlockEntity> i
         return engravingBehaviour.mode.laserOffset;
     }
 
-    private int getRenderedLaserAlpha(float pt) {
+    private float getRenderedLaserWidth(float pt) {
         EngravingBehaviour engravingBehaviour = blockEntity.getEngravingBehaviour();
-        return engravingBehaviour.getRenderedLaserAlpha(pt);
+        return engravingBehaviour.getRenderedLaserWidth(pt);
+    }
+
+    private boolean getRunning() {
+        EngravingBehaviour engravingBehaviour = blockEntity.getEngravingBehaviour();
+        return engravingBehaviour.running;
     }
 
     @Override

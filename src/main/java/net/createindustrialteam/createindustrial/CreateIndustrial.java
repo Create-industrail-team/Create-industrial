@@ -2,7 +2,9 @@ package net.createindustrialteam.createindustrial;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import net.createindustrialteam.createindustrial.data.CIDatagen;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -22,18 +24,19 @@ public class CreateIndustrial {
     private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
 
     public CreateIndustrial(IEventBus eventBus, ModContainer modContainer) {
-        eventBus.addListener(this::commonSetup);
-        eventBus.addListener(this::addCreative);
-        eventBus.register(CIDataGenerators.class);
+       REGISTRATE.registerEventListeners(eventBus);
 
-        REGISTRATE.registerEventListeners(eventBus);
-
+        CICreativeModeTabs.register(eventBus);
         CIBlocks.register(eventBus);
         CIItems.register(eventBus);
-        CICreativeModeTabs.register(eventBus);
         CIBlockEntities.register(eventBus);
         CIRecipeTypes.register(eventBus);
 
+        eventBus.addListener(this::commonSetup);
+        eventBus.addListener(this::addCreative);
+        eventBus.addListener(EventPriority.HIGHEST, CIDatagen::gatherDataHighPriority);
+        eventBus.addListener(EventPriority.LOWEST, CIDatagen::gatherData);
+        eventBus.register(CIDataGenerators.class);
 
         NeoForge.EVENT_BUS.register(this);
 

@@ -52,7 +52,7 @@ public class EngravingRecipe extends StandardProcessingRecipe<SingleRecipeInput>
     @Override
     @OnlyIn(Dist.CLIENT)
     public Component getDescriptionForAssembly() {
-        return CreateLang.translateDirect("recipe.assembly.pressing");
+        return CreateLang.translateDirect("recipe.assembly.engraving");
     }
 
     @Override

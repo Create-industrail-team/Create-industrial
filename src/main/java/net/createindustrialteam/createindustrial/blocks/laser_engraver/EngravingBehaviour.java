@@ -1,8 +1,10 @@
 package net.createindustrialteam.createindustrial.blocks.laser_engraver;
 
 import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour;
+import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +23,7 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
     public static final int ENTITY_SCAN = 10;
 
     EngraverBehaviourSpecifics specifics;
+    public float animationTicks;
     public int prevRunningTicks;
     public int runningTicks;
     public boolean running;
@@ -28,8 +31,6 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
     Mode mode;
 
     int entityScanCooldown;
-
-    int amount = 0;
 
     public interface EngraverBehaviourSpecifics {
 
@@ -49,6 +50,8 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
         this.specifics = be;
         mode = Mode.WORLD;
         entityScanCooldown = ENTITY_SCAN;
+        whenItemEnters((s, i) -> BeltEngravingCallbacks.onItemReceived(s, i, this));
+        whileItemHeld((s, i) -> BeltEngravingCallbacks.whenItemHeld(s, i, this));
     }
 
     @Override
@@ -80,8 +83,15 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
         }
     }
 
-    public int getRenderedLaserAlpha(float partialTicks) {
-        return amount;
+    public float getRenderedLaserWidth(float partialTicks) {
+        if (running)
+            animationTicks += partialTicks;
+        else if (animationTicks % Math.PI >= Math.PI * 15 / 16 || animationTicks % Math.PI <= Math.PI/16)
+            animationTicks = 0;
+        else
+            animationTicks -= partialTicks;
+
+        return (float)Math.sin(animationTicks / 10f);
     }
 
     public void start(Mode mode) {
@@ -89,6 +99,7 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
         running = true;
         prevRunningTicks = 0;
         runningTicks = 0;
+        animationTicks = 0;
         blockEntity.sendData();
     }
 
@@ -103,8 +114,64 @@ public class EngravingBehaviour extends BeltProcessingBehaviour {
         Level level = getWorld();
         BlockPos worldPosition = getPos();
 
-        amount += 3;
-        while (amount >= 256) amount -= 256;
+        if (!running || level == null) {
+            if (level != null && !level.isClientSide) {
+
+                if (specifics.getKineticSpeed() == 0)
+                    return;
+                if (entityScanCooldown > 0)
+                    entityScanCooldown--;
+                if (entityScanCooldown <= 0) {
+                    entityScanCooldown = ENTITY_SCAN;
+
+                    if (BlockEntityBehaviour.get(level, worldPosition.below(2),
+                            TransportedItemStackHandlerBehaviour.TYPE) != null)
+                        return;
+
+                    for (ItemEntity itemEntity : level.getEntitiesOfClass(ItemEntity.class,
+                            new AABB(worldPosition.below()).deflate(.125f))) {
+                        if (!itemEntity.isAlive() || !itemEntity.onGround())
+                            continue;
+                        if (!specifics.tryProcessInWorld(itemEntity, true))
+                            continue;
+                        start(Mode.WORLD);
+                        return;
+                    }
+                }
+
+            }
+            return;
+        }
+
+        if (level.isClientSide && runningTicks == -CYCLE) {
+            prevRunningTicks = CYCLE;
+            return;
+        }
+
+        if (runningTicks == CYCLE && specifics.getKineticSpeed() != 0) {
+            if (inWorld())
+                applyInWorld();
+
+            if (!level.isClientSide)
+                blockEntity.sendData();
+        }
+
+        if (!level.isClientSide && runningTicks > CYCLE) {
+            finished = true;
+            running = false;
+            specifics.onEngravingCompleted();
+            blockEntity.sendData();
+            return;
+        }
+
+        prevRunningTicks = runningTicks;
+        runningTicks += getRunningTickSpeed();
+        if (prevRunningTicks < CYCLE && runningTicks >= CYCLE) {
+            runningTicks = CYCLE;
+            // Pause the ticks until a packet is received
+            if (level.isClientSide && !blockEntity.isVirtual())
+                runningTicks = -CYCLE;
+        }
     }
 
     protected void applyInWorld() {
